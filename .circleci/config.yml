@@ -10,17 +10,11 @@ jobs:
       - image: circleci/ruby:2.4.1-node-browsers
         environment:
           RAILS_ENV: test
-          DB_HOST: 127.0.0.1
-          MYSQL_ALLOW_EMPTY_PASSWORD: yes
-          DB_USERNAME: 'root'
-          DB_PASSWORD: ''
-          socket: '/tmp/mysql.sock'
-          port: 3306
+      - image: circleci/mysql:5.5.62
 
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
       # documented at https://circleci.com/docs/2.0/circleci-images/
-      - image: circleci/mysql:5.5.62
 
     steps:
       - checkout
