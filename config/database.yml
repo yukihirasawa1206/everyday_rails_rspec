@@ -11,7 +11,7 @@ default: &default
   timeout: 5000
   username: root
   socket: /tmp/mysql.sock
-  post: 3306
+  port: 3306
 
 development:
   adapter: mysql2
