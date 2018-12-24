@@ -16,9 +16,11 @@ gem 'jbuilder', '~> 2.5'
 
 group :development, :test do
   gem 'rspec-rails', '~> 3.6.0'
+  gem 'rspec_junit_formatter'
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'capybara', '~> 2.13.0'
   gem 'selenium-webdriver'
+  gem 'rubocop'
 end
 
 group :development do
