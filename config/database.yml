@@ -10,6 +10,8 @@ default: &default
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   timeout: 5000
   username: root
+  socket: /tmp/mysql.sock
+  post: 3306
 
 development:
   adapter: mysql2
