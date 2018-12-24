@@ -14,8 +14,8 @@ jobs:
           DB_USERNAME: 'root'
           DB_PASSWORD: ''
       - image: circleci/mysql:5.5.62
-         environment:
-           MYSQL_ALLOW_EMPTY_PASSWORD: yes
+        environment:
+          MYSQL_ALLOW_EMPTY_PASSWORD: yes
 
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
