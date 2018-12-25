@@ -7,7 +7,6 @@ default: &default
   username: root
   password:
   host: localhost
-  socket: /tmp/mysql.sock
 
 test:
   <<: *default
@@ -15,3 +14,12 @@ test:
   username: <%= ENV['DB_USERNAME'] || 'root' %>
   password: <%= ENV['DB_PASSWORD'] || '' %>
   host: <%= ENV['DB_HOST'] || '127.0.0.1' %>
+  socket: /tmp/mysql.sock
+  
+development:
+  <<: *default
+  database: db/development
+
+production:
+  <<: *default
+  database: db/production
