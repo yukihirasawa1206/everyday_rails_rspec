@@ -6,7 +6,7 @@ RSpec.describe User, type: :model do
     user = User.new(
       first_name: "Aaron",
       last_name: "Sumner",
-      email: "tester@example.com",
+      email: "tester1@example.com",
       password: "password"
     )
     expect(user).to be_valid
