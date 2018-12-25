@@ -2,15 +2,10 @@ require 'rails_helper'
 
 RSpec.describe Project, type: :model do
   it "does not allow duplicate project names per user" do
-    user = User.create(
-      first_name: "Joe",
-      last_name: "Tester",
-      email: "tester1@example.com",
-      password: "password"
-    )
-    user.projects.create(name: "Test Project")
+    user = FactoryBot.create(:user)
+    FactoryBot.create(:project, name: "Test Project", owner: user)
     
-    new_project = user.projects.build(name: "Test Project")
+    new_project = FactoryBot.build(:project, name: "Test Project", owner: user)
     
     new_project.valid?
     
@@ -18,21 +13,38 @@ RSpec.describe Project, type: :model do
   end
   
   it "allows two users to share a project name" do
-    user1 = User.create(
-      first_name: "Joe",
-      last_name: "Tester",
-      email: "tester1@example.com",
-      password: "password"
-      )
-    user2 = User.create(
-      first_name: "Yuki",
-      last_name: "Tester",
-      email: "tester2@example.com",
-      password: "password"
-      )
-    user1.projects.create(name: "Test Project")
-    project = user2.projects.build(name: "Test Project")
+    FactoryBot.create(:project, name: "Test Project")
+    project = FactoryBot.create(:project, name: "Test Project")
     
     expect(project).to be_valid
   end
+  
+  describe "late status" do
+    
+    it "is late when the due date is past today" do
+      project = FactoryBot.build(:project, :due_yesterday)
+      expect(project).to be_late
+    end
+    
+    it "is on time when the due date is today" do
+      project = FactoryBot.build(:project, :due_today)
+      expect(project).to_not be_late
+    end
+    
+    it "is on time when the due date is in the future" do
+      project = FactoryBot.build(:project, :due_tomorrow)
+      expect(project).to_not be_late
+    end
+    
+    it "can have many notes" do
+      project = FactoryBot.create(:project, :with_notes)
+      expect(project.notes.length).to eq 5
+    end
+    
+  end
 end
+
+
+
+
+

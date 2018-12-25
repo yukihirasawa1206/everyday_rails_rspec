@@ -2,45 +2,26 @@ require 'rails_helper'
 
 RSpec.describe Note, type: :model do
   
-  before do
-    @user = User.create(
-      first_name: "Jane",
-      last_name: "Tester",
-      email: "tester@example.com",
-      password: "password")
-  
-    @project = @user.projects.create(name: "Test Project")
-  end
-  
   it "is valid with a user, project and message" do
-    note = Note.new(
-      message: "This is a sample note.",
-      user: @user,
-      project: @project)
-      expect(note).to be_valid
+    note = FactoryBot.build(:note)
+    expect(note).to be_valid
   end
   
   it "is invalid without a message" do
-    note = Note.new(message: nil)
+    note = FactoryBot.build(:note, message: nil)
     note.valid?
     expect(note.errors[:message]).to include("can't be blank")
   end
   
   describe "search message for a term" do
     
-      before do
-        @note1 = @project.notes.create(message: "This is the first note.",
-          user: @user
-        )
-        @note2 = @project.notes.create(message: "This is the second note.",
-          user: @user
-        )
-        @note3 = @project.notes.create(message: "First, preheat the oven.",
-          user: @user
-        )
-      end
-    
     context "when a match is found" do
+      
+      before do
+        @note1 = FactoryBot.create(:note, message: "This is first message.")
+        @note2 = FactoryBot.create(:note, message: "This is second message.")
+        @note3 = FactoryBot.create(:note, message: "First, preheat oven.")
+      end
       it "returns notes that match the search term" do
         expect(Note.search("first")).to include(@note1, @note3)
         expect(Note.search("first")).to_not include(@note2)
