@@ -26,7 +26,7 @@ RSpec.describe ProjectsController, type: :controller do
     
     context "as a guest" do
       
-      it "returnd a 302 response" do
+      it "returns a 302 response" do
         get :index
         expect(response).to have_http_status "302"
       end
@@ -57,7 +57,7 @@ RSpec.describe ProjectsController, type: :controller do
       
     end
     
-    context "as an anauthorized user" do
+    context "as an unauthorized user" do
       
       before do
         @user = FactoryBot.create(:user)
@@ -75,6 +75,56 @@ RSpec.describe ProjectsController, type: :controller do
     
   end
     
+  describe "new" do
+    
+    context "as an authenticated user" do
+      
+      before do 
+        @user = FactoryBot.create(:user)
+      end
+      
+      it "responds to be successfully" do
+        sign_in @user
+        get :new
+        expect(response).to be_success
+      end
+      
+      it "returns a 200 response" do
+        sign_in @user
+        get :new
+        expect(response).to have_http_status '200'
+      end
+      
+    end
+    
+    context "as a guest" do
+      
+      it "redirects to sign in page" do
+        get :new
+        expect(response).to redirect_to '/users/sign_in'
+        expect(response).to have_http_status '302'
+      end
+      
+    end
+    
+  end
+  
+  describe "#edit" do
+    
+    context "" do
+      before do
+        @user = FactoryBot.create(:user)
+        @project = FactoryBot.create(:project, owner: @user)
+      end
+
+      it "returns a 200 status" do
+        sign_in @user
+        get :edit, params: {id: @project.id}
+        expect(response).to have_http_status '200'
+      end
+    end
+  end
+  
   describe "#create" do
     
     context "as an authenticated user" do
@@ -107,7 +157,7 @@ RSpec.describe ProjectsController, type: :controller do
       end
       
     end
-    
+  
     context "as a guest" do
       
       it "returns a 302 response" do
@@ -125,6 +175,7 @@ RSpec.describe ProjectsController, type: :controller do
     end
     
   end
+  
   
   describe "#update" do
     
