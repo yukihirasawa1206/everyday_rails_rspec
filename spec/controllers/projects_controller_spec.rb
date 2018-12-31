@@ -111,16 +111,60 @@ RSpec.describe ProjectsController, type: :controller do
   
   describe "#edit" do
     
-    context "" do
+    context "as a authorized user" do
       before do
         @user = FactoryBot.create(:user)
         @project = FactoryBot.create(:project, owner: @user)
       end
 
-      it "returns a 200 status" do
+      it "returns a 200 response" do
         sign_in @user
         get :edit, params: {id: @project.id}
         expect(response).to have_http_status '200'
+      end
+      
+      it "responds successfully" do
+        sign_in @user
+        get :edit, params: {id: @project.id}
+        expect(response).to be_success
+      end
+    end
+    
+    context "as a unauthorized user" do
+      
+      before do
+        @user = FactoryBot.create(:user)
+        @other_user = FactoryBot.create(:user, first_name: 'otheruser')
+        @others_project = @other_user.projects.create(name: "other's project")
+      end
+      
+      it "returns a 302 response" do
+        sign_in @user
+        get :edit, params: {id: @others_project.id}
+        expect(response).to have_http_status '302'
+      end
+      
+      it "responds successfully" do
+        sign_in @user
+        get :edit, params: {id: @others_project.id}
+        expect(response).to_not be_success
+      end
+      
+    end
+    
+    context "as a guest" do
+      before do
+        @project = FactoryBot.create(:project)
+      end
+      
+      it "returns a 302 response" do
+        get :edit, params: {id: @project.id}
+        expect(response).to have_http_status '302'
+      end
+      
+      it "redirects to sign in page" do
+        get :edit, params: {id: @project.id}
+        expect(response).to redirect_to '/users/sign_in'
       end
     end
   end
