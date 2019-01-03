@@ -36,7 +36,7 @@ jobs:
           command: |
             sudo apt-get update
             sudo apt-get autoremove google-chrome-stable
-            sudo apt-get google-chrome-stable=64.0.3282.186-1
+            sudo apt-get install google-chrome-stable=64.0.3282.186-1
 
       - run:
           name: install dependencies
