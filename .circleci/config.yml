@@ -7,7 +7,7 @@ jobs:
   build:
     docker:
       # specify the version you desire here
-      - image: circleci/ruby:2.5.3-node-browsers 
+      - image: circleci/ruby:2.4.3-node-browsers 
         environment:
           RAILS_ENV: test
           DB_HOST: 127.0.0.1
@@ -36,7 +36,6 @@ jobs:
           command: |
             sudo apt-get update
             sudo apt-get remove -y google-chrome-stable
-            sudo apt-get install google-chrome-stable=69.0.3497.100-1
 
       - run:
           name: install dependencies
