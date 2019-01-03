@@ -275,7 +275,7 @@ DEPENDENCIES
   bootstrap-sass
   byebug
   capybara (= 3.6.0)
-  chromedriver-helper (~> 2.0.0)
+  chromedriver-helper
   coffee-rails (~> 4.2)
   devise
   dotenv-rails

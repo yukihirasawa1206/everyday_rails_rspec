@@ -27,7 +27,7 @@ group :test do
   gem 'capybara', '3.6.0' #'~>2.15.2'
   gem 'launchy'
   gem 'selenium-webdriver','~> 3.6.0'
-  gem 'chromedriver-helper','~>2.0.0' #unless ENV.key?('CIRCLECI')
+  gem 'chromedriver-helper' unless ENV.key?('CIRCLECI')
 end
 
 group :development do
