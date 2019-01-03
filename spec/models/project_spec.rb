@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Project, type: :model do
+  
   it "does not allow duplicate project names per user" do
     user = FactoryBot.create(:user)
     FactoryBot.create(:project, name: "Test Project", owner: user)
@@ -43,8 +44,3 @@ RSpec.describe Project, type: :model do
     
   end
 end
-
-
-
-
-

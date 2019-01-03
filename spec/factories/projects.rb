@@ -25,7 +25,7 @@ FactoryBot.define do
     trait :invalid do
       name nil
     end
-    
-  end
   
+  end
+    
 end

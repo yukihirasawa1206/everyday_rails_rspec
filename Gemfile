@@ -15,7 +15,8 @@ gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
 
 group :development, :test do
-  gem 'rspec-rails', '~> 3.6.0'
+  gem 'rspec-rails', '~> 3.8.0'
+  gem 'rspec-core', '~> 3.8.0'
   gem 'factory_bot_rails', "~> 4.10.0"
   gem 'rspec_junit_formatter'
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
@@ -23,7 +24,7 @@ group :development, :test do
 end
 
 group :test do
-  gem 'capybara', '~>2.15.2'
+  gem 'capybara', '3.6.0' #'~>2.15.2'
   gem 'launchy'
   gem 'selenium-webdriver','~> 3.6.0'
   gem 'chromedriver-helper' unless ENV.key?('CIRCLECI')
