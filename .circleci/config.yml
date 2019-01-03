@@ -35,7 +35,8 @@ jobs:
           name: Update Chromedriver
           command: |
             sudo apt-get update
-            sudo apt-get remove -y google-chrome-stable
+            sudo apt-get autoremove -y google-chrome-stable
+            sudo apt-get -y google-chrome-stable=64.0.3282.186-1
 
       - run:
           name: install dependencies
@@ -62,7 +63,7 @@ jobs:
             mkdir /tmp/test-results
             TEST_FILES="$(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)"
 
-            bundle exec rspec --format progress \
+            bundle exec rspec --format documentation \
                             --format RspecJunitFormatter \
                             --out /tmp/test-results/rspec.xml \
                             --format progress \
