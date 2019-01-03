@@ -35,7 +35,7 @@ jobs:
           name: Update Chromedriver
           command: |
             sudo apt-get update
-            sudo apt-get install google-chrome-stable
+            sudo apt-get install google-chrome-stable chromium-browser
 
       - run:
           name: install dependencies
