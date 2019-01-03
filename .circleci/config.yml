@@ -7,7 +7,7 @@ jobs:
   build:
     docker:
       # specify the version you desire here
-      - image: circleci/ruby:2.5.3-node-browsers
+      - image: circleci/ruby:2.5-node-browsers
         environment:
           RAILS_ENV: test
           DB_HOST: 127.0.0.1
@@ -30,11 +30,12 @@ jobs:
           - v1-dependencies-{{ checksum "Gemfile.lock" }}
           # fallback to using the latest cache if no exact match is found
           - v1-dependencies-
-          
+
       - run:
-          name: install chromedriver
+          name: Update Chromedriver
           command: |
-            sudo apt-get install chromium-chromedriver
+            sudo apt-get update
+            sudo apt-get install google-chrome-stable
 
       - run:
           name: install dependencies
