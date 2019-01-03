@@ -16,6 +16,7 @@ gem 'jbuilder', '~> 2.5'
 
 group :development, :test do
   gem 'rspec-rails', '~> 3.8.0'
+  gem 'rspec-core', '~> 3.8.0'
   gem 'factory_bot_rails', "~> 4.10.0"
   gem 'rspec_junit_formatter'
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

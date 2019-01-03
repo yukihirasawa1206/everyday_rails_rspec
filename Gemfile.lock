@@ -290,6 +290,7 @@ DEPENDENCIES
   paperclip
   puma (~> 3.7)
   rails (~> 5.1.1)
+  rspec-core (~> 3.8.0)
   rspec-rails (~> 3.8.0)
   rspec_junit_formatter
   rubocop
