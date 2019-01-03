@@ -61,13 +61,24 @@ jobs:
           name: run tests
           command: |
             mkdir /tmp/test-results
-            TEST_FILES="$(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)"
-
+            TEST_FILES1="$(circleci tests glob "spec/models/*_spec.rb" | circleci tests split --split-by=timings)"
+            TEST_FILES2="$(circleci tests glob "spec/controllers/*_spec.rb" | circleci tests split --split-by=timings)"
+            TEST_FILES3="$(circleci tests glob "spec/features/*_spec.rb" | circleci tests split --split-by=timings)"
             bundle exec rspec --format documentation \
                             --format RspecJunitFormatter \
                             --out /tmp/test-results/rspec.xml \
                             --format progress \
-                            $TEST_FILES
+                            $TEST_FILES1
+            bundle exec rspec --format documentation \
+                            --format RspecJunitFormatter \
+                            --out /tmp/test-results/rspec.xml \
+                            --format progress \
+                            $TEST_FILES2
+            bundle exec rspec --format documentation \
+                            --format RspecJunitFormatter \
+                            --out /tmp/test-results/rspec.xml \
+                            --format progress \
+                            $TEST_FILES3
 
       # collect reports
       - store_test_results:
