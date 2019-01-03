@@ -23,7 +23,7 @@ RSpec.describe Project, type: :model do
   describe "late status" do
     
     it "is late when the due date is past today" do
-      project = FactoryBot.build(:project, due_on: 1.day.ago)
+      project = FactoryBot.build(:project, :due_yesterday)
       expect(project).to be_late
     end
     
