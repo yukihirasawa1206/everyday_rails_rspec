@@ -31,11 +31,11 @@ jobs:
           # fallback to using the latest cache if no exact match is found
           - v1-dependencies-
 
-      - run:
-          name: Update Chromedriver
-          command: |
-            sudo apt-get update
-            sudo apt-get install google-chrome-stable
+      # - run:
+      #     name: Update Chromedriver
+      #     command: |
+      #       sudo apt-get update
+      #       sudo apt-get install google-chrome-stable
 
       - run:
           name: install dependencies
