@@ -7,7 +7,7 @@ jobs:
   build:
     docker:
       # specify the version you desire here
-      - image: circleci/ruby:2.4.3-node-browsers 
+      - image: circleci/ruby:2.5.3-node-browsers 
         environment:
           RAILS_ENV: test
           DB_HOST: 127.0.0.1
@@ -35,8 +35,8 @@ jobs:
           name: Update Chromedriver
           command: |
             sudo apt-get update
-            sudo apt-get autoremove -y google-chrome-stable
-            sudo apt-get -y google-chrome-stable=64.0.3282.186-1
+            sudo apt-get autoremove google-chrome-stable
+            sudo apt-get google-chrome-stable=64.0.3282.186-1
 
       - run:
           name: install dependencies
