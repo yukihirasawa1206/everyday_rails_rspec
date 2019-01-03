@@ -19,9 +19,14 @@ group :development, :test do
   gem 'factory_bot_rails', "~> 4.10.0"
   gem 'rspec_junit_formatter'
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
-  gem 'capybara', '~> 2.13.0'
-  gem 'selenium-webdriver'
   gem 'rubocop'
+end
+
+group :test do
+  gem 'capybara', '~>2.15.2'
+  gem 'launchy'
+  gem 'selenium-webdriver','~> 3.5.2'
+  gem 'chromedriver-helper'
 end
 
 group :development do
