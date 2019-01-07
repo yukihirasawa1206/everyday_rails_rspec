@@ -25,8 +25,12 @@ jobs:
           command: dockerize -wait tcp://127.0.0.1:3306 -timeout 120s
 
       - run:
+          name: bundler update
+          command: gem install bundler -v 2.0.1 || bundle _2.0.1_ install
+
+      - run:
           name: install dependencies
-          command: bundle _2.0.1_ install --jobs=4 --retry=3 --path vendor/bundle
+          command: bundle check --path=vendor/bundle || bundle install --jobs=4 --retry=3 --path vendor/bundle
 
       - run: gem install rake
 
@@ -36,6 +40,7 @@ jobs:
           key: v1-dependencies-{{ checksum "Gemfile.lock" }}
 
       - run: bundle exec rake db:create
+
       - run: bundle exec rake db:schema:load
 
       - run:
