@@ -24,14 +24,12 @@ jobs:
       - run:
           name: Wait for DB
           command: dockerize -wait tcp://127.0.0.1:3306 -timeout 120s
-      - run:
-          name: bundler update
-          command: gem install bundler -v 2.0.1 || bundle _2.0.1_ install
-      - run: gem install rake
 
       - run:
           name: install dependencies
-          command: bundle check --path=vendor/bundle || bundle install --jobs=4 --retry=3 --path vendor/bundle
+          command: bundle check --path=vendor/bundle || bundle _2.0.1_ install --jobs=4 --retry=3 --path vendor/bundle
+
+      - run: gem install rake
 
       - save_cache:
           paths:
@@ -58,42 +56,3 @@ jobs:
       - store_artifacts:
           path: /tmp/test-results
           destination: test-results
-
-      # - restore_cache:
-      #     keys:
-      #     - v1-dependencies-{{ checksum "Gemfile.lock" }}
-      #     - v1-dependencies-
-      #
-      # - run:
-      #     name: Wait for DB
-      #     command: dockerize -wait tcp://127.0.0.1:3306 -timeout 120s
-      #
-      # - run: gem install bundler -v 2.0.1
-      # - run:
-      #     name: install dependencies
-      #     command: |
-      #       bundle _2.0.1_ install --jobs=4 --retry=3 --path vendor/bundle
-      #
-      # - run: bundle exec rails db:create
-      # - run: bundle exec rails db:schema:load
-      #
-      # - save_cache:
-      #     paths:
-      #       - ./vendor/bundle
-      #     key: v1-dependencies-{{ checksum "Gemfile.lock" }}
-      #
-      # - run:
-      #     name: run tests
-      #     command: |
-      #       mkdir /tmp/test-results
-      #       TEST_FILES="$(circleci tests glob "spec/**/*_spec.rb"| circleci tests split --split-by=timings)"
-      #       bundle exec rspec --format documentation \
-      #                       --format RspecJunitFormatter \
-      #                       --out /tmp/test-results/rspec.xml \
-      #                       --format progress \
-      #                       $TEST_FILES
-      # - store_test_results:
-      #     path: /tmp/test-results
-      # - store_artifacts:
-      #     path: /tmp/test-results
-      #     destination: test-results
