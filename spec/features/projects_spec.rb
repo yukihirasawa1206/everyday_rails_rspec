@@ -17,7 +17,5 @@ RSpec.feature "Projects", type: :feature do
 			expect(page).to have_content "Owner: #{user.name}"
 			}.to change(user.projects, :count).by(1)
 	end
-
-
-
+  
 end
