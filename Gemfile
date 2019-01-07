@@ -28,6 +28,8 @@ group :test do
   gem 'launchy'
   gem 'selenium-webdriver','~> 3.6.0'
   gem 'chromedriver-helper' unless ENV.key?('CIRCLECI')
+	gem 'shoulda-matchers', '4.0.0.rc1'
+	gem 'rails-controller-testing'
 end
 
 group :development do

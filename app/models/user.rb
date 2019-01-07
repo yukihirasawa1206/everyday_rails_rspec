@@ -14,7 +14,7 @@ class User < ApplicationRecord
   after_create :send_welcome_email
 
   def name
-    [first_name, last_name].join(" ")
+  	[first_name, last_name].join(" ")
   end
 
   geocoded_by :last_sign_in_ip do |user, result|
