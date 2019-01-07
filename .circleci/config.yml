@@ -27,6 +27,7 @@ jobs:
       - run:
           name: bundler update
           command: gem install bundler -v 2.0.1 || bundle _2.0.1_ install
+      - run: gem install rake
 
       - run:
           name: install dependencies
