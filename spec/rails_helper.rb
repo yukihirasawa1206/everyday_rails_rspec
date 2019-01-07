@@ -31,6 +31,7 @@ RSpec.configure do |config|
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.include Devise::Test::ControllerHelpers, type: :controller
 	config.include RequestSpecHelper, type: :request
+	config.include Devise::Test::IntegrationHelpers, type: :feature
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
 
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
