@@ -19,10 +19,10 @@
 /.env
 /node_modules
 /yarn-error.log
-
 .byebug_history
 
 # Ignore uploads from Paperclip
 /public/system
+/spec/test_uploads
 
 .ruby-version
