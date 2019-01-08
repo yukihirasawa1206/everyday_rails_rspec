@@ -16,7 +16,7 @@ RSpec.feature "SignUps", type: :feature do
 			fill_in "Password", with: "test123"
 			fill_in "Password confirmation", with: "test123"
 			click_button "Sign up"
-			}.to change(User, :count),by(1)
+			}.to change(User, :count).by(1)
 
 			expect(page).to have_content "Welcome! You have signed up successfully."
 			expect(current_path).to eq root_path
@@ -28,7 +28,7 @@ RSpec.feature "SignUps", type: :feature do
 		aggregate_failures do
 			expect(mail.to).to eq ["test@example.com"]
 			expect(mail.from).to eq ["support@example.com"]
-			expect(mail.subjext).to eq "Welcome to Projects!"
+			expect(mail.subject).to eq "Welcome to Projects!"
 			expect(mail.body).to match "Hello First,"
 			expect(mail.body).to match "test@example.com"
 	 	end
