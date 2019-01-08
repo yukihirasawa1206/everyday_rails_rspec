@@ -30,6 +30,8 @@ group :test do
   gem 'chromedriver-helper' unless ENV.key?('CIRCLECI')
 	gem 'shoulda-matchers', '4.0.0.rc1'
 	gem 'rails-controller-testing'
+	gem 'vcr'
+	gem 'webmock'
 end
 
 group :development do
