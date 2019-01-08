@@ -17,5 +17,18 @@ RSpec.feature "Projects", type: :feature do
 			expect(page).to have_content "Owner: #{user.name}"
 			}.to change(user.projects, :count).by(1)
 	end
-  
+
+	scenario "user completes a project" do
+		user = FactoryBot.create(:user)
+		project = FactoryBot.create(:project, owner: user)
+		login_as user, scope: :user
+
+		visit project_path(project)
+		expect(page).to have_button "Complete"
+		click_button "Complete"
+		expect(project.reload.completed?).to be true
+		expect(page).to have_content "Congratulations, this project is complete!"
+		expect(page).to have_content "Completed"
+	end
+
 end

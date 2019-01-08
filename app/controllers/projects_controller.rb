@@ -1,5 +1,5 @@
 class ProjectsController < ApplicationController
-  before_action :set_project, only: [:show, :edit, :update, :destroy]
+  before_action :set_project, only: [:show, :edit, :update, :destroy, :complete]
   before_action :project_owner?, except: [:index, :new, :create]
 
   # GET /projects
@@ -17,7 +17,6 @@ class ProjectsController < ApplicationController
   def new
     @project = Project.new
   end
-
   # GET /projects/1/edit
   def edit
   end
@@ -61,6 +60,12 @@ class ProjectsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+	def complete
+		@project.update_attributes!(completed: true)
+		redirect_to @project,
+			notice: "Congratulations, this project is complete!"
+	end
 
   private
     # Use callbacks to share common setup or constraints between actions.

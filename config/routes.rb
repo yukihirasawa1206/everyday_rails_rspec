@@ -9,10 +9,17 @@ Rails.application.routes.draw do
   resources :projects do
     resources :notes
     resources :tasks do
+
       member do
         post :toggle
       end
+
     end
+
+			member do
+				patch :complete
+			end
+
   end
 
   namespace :api do
